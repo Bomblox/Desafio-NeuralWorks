@@ -8,17 +8,18 @@
 
 # ###### Se serealizó el modelo de XGBoost después del GridCV. Utilicé Flask para implementar tu modelo y crear una API porque Flask es un framework ligero y fácil de usar para el desarrollo de aplicaciones web en Python
 
-# In[1]:
+# In[3]:
 
 
 from flask import Flask, request, jsonify
-import joblib
+import pickle
 import numpy as np
 
 app = Flask(__name__)
 
-# Cargar el modelo desde el archivo .pkl
-modelo = joblib.load('XGBoost_GridCV.pkl')
+# Cargar el modelo desde el archivo .pkl utilizando pickle
+with open('XGBoost_GridCV2.pkl', 'rb') as file:
+    modelo = pickle.load(file)
 
 @app.route('/', methods=['POST'])
 def predict():
